@@ -202,7 +202,7 @@ extension OpenAISwift {
         if let token = self.token {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-        if let token = self.org {
+        if let org = self.org {
             request.setValue("\(org)", forHTTPHeaderField: "OpenAI-Organization")
         }
 

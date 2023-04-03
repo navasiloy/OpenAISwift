@@ -180,6 +180,10 @@ extension OpenAISwift {
         }
     }
     
+    public func changeOrganization(_ organization: String) {
+        self.org = organization
+    }
+
     private func makeRequest(request: URLRequest, completionHandler: @escaping (Result<Data, Error>) -> Void) {
         let session = config.session
         let task = session.dataTask(with: request) { (data, response, error) in

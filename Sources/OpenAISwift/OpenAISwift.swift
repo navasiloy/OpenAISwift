@@ -12,6 +12,7 @@ public enum OpenAIError: Error {
 
 public class OpenAISwift {
     fileprivate(set) var token: String?
+    fileprivate(set) var org: String?
     fileprivate let config: Config
     
     /// Configuration object for the client
@@ -26,7 +27,8 @@ public class OpenAISwift {
         let session:URLSession
     }
     
-    public init(authToken: String, config: Config = Config()) {
+    public init(authToken: String, org: String, config: Config = Config()) {
+        self.org = org
         self.token = authToken
         self.config = Config()
     }
@@ -200,6 +202,10 @@ extension OpenAISwift {
         if let token = self.token {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
+        if let token = self.org {
+            request.setValue("\(org)", forHTTPHeaderField: "OpenAI-Organization")
+        }
+
         
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         
